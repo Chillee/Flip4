@@ -98,6 +98,7 @@ class Board {
             column.addEventListener('click', (event) => {
                 let succeeded = this.add_player_piece(x);
                 if (!succeeded) return;
+                // this.check_win();
                 this.swap_players();
             });
 
@@ -116,7 +117,7 @@ class Board {
         return board;
     }
 
-    check_win(): [boolean, [number, number][]] {
+    check_win(): [boolean, boolean, [number, number][]] {
         let potentials = [];
         for (let x = 0; x < this.width; x++) {
             for (let y = 0; y < this.height; y++) {
@@ -156,10 +157,10 @@ class Board {
                 positions.push([t[1], t[2]]);
             }
             if (works) {
-                return [true, positions];
+                return [true, piece!, positions];
             }
         }
-        return [false, []];
+        return [false, false, []];
     }
 
     refresh_display(): boolean {
@@ -170,8 +171,8 @@ class Board {
         const res = this.check_win();
         if (res[0]) {
             let status = <HTMLDivElement>document.getElementById('status');
-            status.innerText = `${res[0] ? this.playerColor : this.opponentColor} won!`;
-            for (const pos of res[1]) {
+            status.innerText = `${res[1] ? this.playerColor : this.opponentColor} won!`;
+            for (const pos of res[2]) {
                 console.log(pos);
                 let pieces = document.getElementsByClassName(`pos-${pos[0]}-${pos[1]}`);
                 console.log(pieces);
