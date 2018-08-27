@@ -21,7 +21,9 @@ var Board = /** @class */ (function () {
             return false;
         this.board[column].push(true);
         this.turnCount++;
-        this.refresh_display();
+        if (this.refresh_display()) {
+            return false;
+        }
         if (this.turnCount % 2 == 0)
             this.flip_board_animate();
         return true;
@@ -182,7 +184,7 @@ var Board = /** @class */ (function () {
         var res = this.check_win();
         if (res[0]) {
             var status_1 = document.getElementById('status');
-            status_1.innerText = (res[0] !== this.isFlipped ? "Player 2" : "Player 1") + " won!";
+            status_1.innerText = (res[0] ? this.playerColor : this.opponentColor) + " won!";
             for (var _i = 0, _a = res[1]; _i < _a.length; _i++) {
                 var pos = _a[_i];
                 console.log(pos);
@@ -197,7 +199,9 @@ var Board = /** @class */ (function () {
                 var t = x.cloneNode(true);
                 x.parentNode.replaceChild(t, x);
             }
+            return true;
         }
+        return false;
     };
     return Board;
 }());

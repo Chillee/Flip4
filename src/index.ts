@@ -21,7 +21,9 @@ class Board {
         if (this.board[column].length == this.height) return false;
         this.board[column].push(true);
         this.turnCount++;
-        this.refresh_display();
+        if (this.refresh_display()) {
+            return false;
+        }
         if (this.turnCount % 2 == 0)
             this.flip_board_animate();
 
@@ -159,7 +161,7 @@ class Board {
         return [false, []];
     }
 
-    refresh_display() {
+    refresh_display(): boolean {
         let visual = this.generate_visual();
         let board = document.getElementsByClassName('board')![0];
         board.innerHTML = "";
@@ -167,7 +169,7 @@ class Board {
         const res = this.check_win();
         if (res[0]) {
             let status = <HTMLDivElement>document.getElementById('status');
-            status.innerText = `${res[0] !== this.isFlipped ? "Player 2" : "Player 1"} won!`;
+            status.innerText = `${res[0] ? this.playerColor : this.opponentColor} won!`;
             for (const pos of res[1]) {
                 console.log(pos);
                 let pieces = document.getElementsByClassName(`pos-${pos[0]}-${pos[1]}`);
@@ -180,9 +182,10 @@ class Board {
                 let x = cols.item(i);
                 let t = x.cloneNode(true);
                 x.parentNode!.replaceChild(t, x);
-
             }
+            return true;
         }
+        return false;
     }
 }
 
