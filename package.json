@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "watch": "nodemon out/server.js",
-    "start": "node out/server.js"
+    "start": "tsc && node out/server.js"
   },
   "author": "",
   "license": "ISC",

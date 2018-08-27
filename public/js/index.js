@@ -1,5 +1,4 @@
 "use strict";
-// import * as jquery from 'jquery';
 let animations = [];
 class Board {
     constructor(height, width) {
