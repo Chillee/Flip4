@@ -2,8 +2,8 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <title>Connect 4 | node js</title>
+    <link rel="stylesheet" type="text/css" href="public/css/style.css">
+    <title>Flip 4 </title>
 </head>
 
 <body>
@@ -15,7 +15,7 @@
         <div class="player_color red "></div>
         <div class="opponent_color yellow "></div>
         <div class="board">
-            <img src="img/board.svg" class="overlay">
+            <img src="public/img/board.svg" class="overlay">
             <div class="cols">
                 <div class="col" id="col_1" data-in-col="0"></div>
                 <div class="col" id="col_2" data-in-col="0"></div>
@@ -28,7 +28,8 @@
         </div>
     </div>
     <div id='status'></div>
-    <script src="index.js" type="text/javascript"></script>
+    <button id='backButton'>Back</button>
+    <script src="src/index.js" type="text/javascript"></script>
 </body>
 
 </html>
